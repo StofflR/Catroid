@@ -24,11 +24,20 @@
 package org.catrobat.catroid.plot
 
 import android.graphics.PointF
+import com.badlogic.gdx.graphics.Camera
+import com.badlogic.gdx.graphics.Color
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer
+import com.badlogic.gdx.utils.Queue
+import org.catrobat.catroid.stage.StageActivity
 
 class Plot
 {
     private var isPlotting = false
     private var dataPointLists = ArrayList<ArrayList<PointF>>()
+    private var drawQueue = Queue<Queue<PointF>>()
+
+    var width = 0.0F
+    var height = 0.0F
 
 
     fun pause(){
@@ -43,15 +52,73 @@ class Plot
         return isPlotting
     }
 
+    fun startNewPlotLine(){
+        dataPointLists.add(ArrayList())
+        drawQueue.addLast(Queue())
+    }
     fun startNewPlotLine(point : PointF){
         dataPointLists.add(arrayListOf(point))
+        drawQueue.addLast(Queue())
+        drawQueue.last().addLast(point)
     }
 
     fun addPoint(point : PointF){
         dataPointLists.last().add(point)
+        drawQueue.last().addLast(point)
     }
 
-    fun data() : List<List<PointF>>{
+    fun data() : ArrayList<ArrayList<PointF>>{
         return dataPointLists
+    }
+
+    private fun canDraw(): Boolean {
+        return drawQueue.size > 2 || (!drawQueue.isEmpty && drawQueue.last().size > 2)
+    }
+
+    private fun updateQueue(){
+        if (drawQueue.isEmpty || drawQueue.size == 1) return
+        if(drawQueue.first().size == 1)
+            drawQueue.removeFirst()
+    }
+
+    fun drawLinesForSprite(screenRatio: Float, camera: Camera?) {
+        if (camera == null)
+            return
+
+        val renderer = StageActivity.stageListener.shapeRenderer
+        renderer.color = Color(1.0F, 1.0F, 1.0F, 1.0F)
+        renderer.begin(ShapeRenderer.ShapeType.Filled)
+
+
+
+        while (canDraw()) {
+            drawLine(screenRatio, renderer, camera)
+            updateQueue()
+        }
+
+        renderer.end()
+        width = camera.viewportHeight
+        height = camera.viewportWidth
+
+    }
+
+    private fun drawLine(screenRatio: Float, renderer: ShapeRenderer, camera: Camera) {
+        val currentPosition: PointF = drawQueue.first().removeFirst()
+        val nextPosition: PointF = drawQueue.first().first()
+        currentPosition.x += camera.position.x
+        currentPosition.y += camera.position.y
+        nextPosition.x += camera.position.x
+        nextPosition.y += camera.position.y
+        if (currentPosition.x != nextPosition.x || currentPosition.y != nextPosition.y) {
+            val penSize: Float = screenRatio
+            renderer.circle(currentPosition.x, currentPosition.y, penSize / 2)
+            renderer.rectLine(
+                currentPosition.x, currentPosition.y, nextPosition.x, nextPosition.y,
+                penSize
+            )
+            renderer.circle(nextPosition.x, nextPosition.y, penSize / 2)
+        }
+        nextPosition.x -= camera.position.x
+        nextPosition.y -= camera.position.y
     }
 }

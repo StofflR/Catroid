@@ -360,6 +360,7 @@ public class Sprite implements Nameable, Serializable {
 		}
 
 		penConfiguration = new PenConfiguration();
+		plot = new Plot();
 		runningStitch = new RunningStitch();
 	}
 
@@ -367,6 +368,7 @@ public class Sprite implements Nameable, Serializable {
 		idToEventThreadMap = null;
 		conditionScriptTriggers = null;
 		penConfiguration = null;
+		plot = null;
 		runningStitch = null;
 	}
 
@@ -467,6 +469,7 @@ public class Sprite implements Nameable, Serializable {
 		convertedSprite.look.setLookData(look.getLookData());
 
 		convertedSprite.penConfiguration = penConfiguration;
+		convertedSprite.plot = plot;
 		convertedSprite.runningStitch = runningStitch;
 
 		convertedSprite.lookList = lookList;

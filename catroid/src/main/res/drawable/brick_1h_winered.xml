@@ -85,17 +85,17 @@
               <path
                   android:pathData="M7.271,27.5h31.458v1h-31.458z"
                   android:strokeAlpha="0.5"
-                  android:fillColor="#750701">
+                  android:fillColor="#ae2f2f">
                  </path>
                  <path
                      android:pathData="M7.271,27.5h1.5v7.636h-1.5z"
                      android:strokeAlpha="0.5"
-                     android:fillColor="#750701">
+                     android:fillColor="#ae2f2f">
                   </path>
                 <path
                     android:pathData="M38.729,27.5h-1.5v7.636h1.5z"
                     android:strokeAlpha="0.5"
-                    android:fillColor="#750701">
+                    android:fillColor="#ae2f2f">
                   </path>
              </group>
             </group>
@@ -110,17 +110,17 @@
                 <path
                     android:pathData="M7.271,33.5h31.458v1h-31.458z"
                     android:strokeAlpha="0.5"
-                    android:fillColor="#750701">
+                    android:fillColor="#ae2f2f">
                  </path>
                  <path
                      android:pathData="M7.271,33.5h1.5v7.636h-1.5z"
                      android:strokeAlpha="0.5"
-                     android:fillColor="#750701">
+                     android:fillColor="#ae2f2f">
                   </path>
                 <path
                     android:pathData="M38.729,33.5h-1.5v7.636h1.5z"
                     android:strokeAlpha="0.5"
-                    android:fillColor="#750701">
+                    android:fillColor="#ae2f2f">
                   </path>
             </group>
             </group>
@@ -135,17 +135,17 @@
                  <path
                      android:pathData="M7.271,39.5h31.458v1h-31.458z"
                      android:strokeAlpha="0.5"
-                     android:fillColor="#750701">
+                     android:fillColor="#ae2f2f">
                  </path>
                  <path
                      android:pathData="M7.271,39.5h1.5v7.636h-1.5z"
                      android:strokeAlpha="0.5"
-                     android:fillColor="#750701">
+                     android:fillColor="#ae2f2f">
                   </path>
                 <path
                     android:pathData="M38.729,39.5h-1.5v7.636h1.5z"
                     android:strokeAlpha="0.5"
-                    android:fillColor="#750701">
+                    android:fillColor="#ae2f2f">
                   </path>
 
  </group>

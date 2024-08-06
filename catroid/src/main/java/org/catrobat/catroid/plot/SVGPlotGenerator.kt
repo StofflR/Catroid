@@ -28,21 +28,49 @@ import java.io.File
 
 class SVGPlotGenerator(plot : Plot?){
     private val data = plot?.data()
+    private val width = plot?.width
+    private val height = plot?.height
 
     fun writeToSVGFile(targetFile : File){
         targetFile.writeText(generateSVGContent())
     }
     private fun generateSVGPath(line : List<PointF>) : String {
-        return "blb"
+        var path = ""
+        if(line.size < 2) return path
+        path = "<path fill=\"none\" style=\"stroke:rgb(0,0,0);stroke-width:1;stroke-linecap:round;stroke-opacity:1;\" d=\"M"
+        path += "%.2f".format(line[0].x) + " " + "%.2f".format(line[0].y)
+
+        for (point in line.subList(1, line.size))
+            path = path + " L" + "%.2f".format(point.x) + " " + "%.2f".format(point.y)
+
+        path += "\" />"
+        return path
     }
 
     private fun generateSVGContent() : String {
+
         val builder = StringBuilder()
+        builder.append("<?xml version=\"1.0\" standalone=\"no\"?>\n<!DOCTYPE svg PUBLIC \"-//W3C//DTD SVG 1.1//EN\" \"http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd\">\n")
+        builder.append("<svg width=\"")
+        builder.append("%.2f".format(width))
+        builder.append("\" height=\"")
+        builder.append("%.2f".format(height))
+        builder.append("\" ")
+        builder.append("viewBox=\"0 0 ")
+        builder.append("%.2f".format(width))
+        builder.append(" ")
+        builder.append("%.2f".format(height))
+        builder.append("\" ")
+        builder.append("style=\"background-color:#ffffff\" xmlns=\"http://www.w3.org/2000/svg\" version=\"1.1\">\n")
+
+        builder.append("<title>Plotter export</title>\n")
+
         if (data != null) {
             for (line in data) {
                 builder.append(generateSVGPath(line))
             }
         }
+        builder.append("\n</svg>")
         return builder.toString()
     }
 }
