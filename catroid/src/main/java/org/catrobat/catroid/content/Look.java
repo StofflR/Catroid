@@ -456,7 +456,12 @@ public class Look extends Image {
 	}
 
 	public void changeYInUserInterfaceDimensionUnit(float changeY) {
+
 		setY(getY() + changeY);
+	}
+
+	public void changePositionInInterfaceDimensionUnit(float changeX, float changeY){
+		setPosition(getX() + changeX, getY() + changeY);
 	}
 
 	public float getWidthInUserInterfaceDimensionUnit() {

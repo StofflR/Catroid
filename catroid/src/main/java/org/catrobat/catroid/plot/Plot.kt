@@ -86,10 +86,8 @@ class Plot
             return
 
         val renderer = StageActivity.stageListener.shapeRenderer
-        renderer.color = Color(1.0F, 1.0F, 1.0F, 1.0F)
+        renderer.color = Color(0.0F, 0.0F, 0.0F, 255.0F)
         renderer.begin(ShapeRenderer.ShapeType.Filled)
-
-
 
         while (canDraw()) {
             drawLine(screenRatio, renderer, camera)
@@ -97,8 +95,8 @@ class Plot
         }
 
         renderer.end()
-        width = camera.viewportHeight
-        height = camera.viewportWidth
+        width = camera.viewportWidth
+        height = camera.viewportHeight
 
     }
 
@@ -110,7 +108,7 @@ class Plot
         nextPosition.x += camera.position.x
         nextPosition.y += camera.position.y
         if (currentPosition.x != nextPosition.x || currentPosition.y != nextPosition.y) {
-            val penSize: Float = screenRatio
+            val penSize: Float = screenRatio * 2.0F
             renderer.circle(currentPosition.x, currentPosition.y, penSize / 2)
             renderer.rectLine(
                 currentPosition.x, currentPosition.y, nextPosition.x, nextPosition.y,
