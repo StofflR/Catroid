@@ -103,6 +103,7 @@ import org.catrobat.catroid.content.actions.PlayNoteForBeatsAction;
 import org.catrobat.catroid.content.actions.PlaySoundAction;
 import org.catrobat.catroid.content.actions.PlaySoundAtAction;
 import org.catrobat.catroid.content.actions.PlotArcAction;
+import org.catrobat.catroid.content.actions.PlotThroughAction;
 import org.catrobat.catroid.content.actions.PointInDirectionAction;
 import org.catrobat.catroid.content.actions.PointToAction;
 import org.catrobat.catroid.content.actions.RaspiIfLogicAction;
@@ -195,6 +196,7 @@ import org.catrobat.catroid.content.bricks.PhiroMotorStopBrick;
 import org.catrobat.catroid.content.bricks.PhiroPlayToneBrick;
 import org.catrobat.catroid.content.bricks.PhiroRGBLightBrick;
 import org.catrobat.catroid.content.bricks.PlotArcBrick;
+import org.catrobat.catroid.content.bricks.PlotThroughBrick;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableDrum;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableMusicalInstrument;
 import org.catrobat.catroid.formulaeditor.Formula;
@@ -604,6 +606,18 @@ public class ActionFactory extends Actions {
 
 		return action;
 	}
+
+	public Action createPlotThroughAction(Sprite sprite, SequenceAction sequence,
+			Formula x1, Formula y1, Formula x2, Formula y2) {
+		PlotThroughAction action = Actions.action(PlotThroughAction.class);
+		action.setScope(new Scope(ProjectManager.getInstance().getCurrentProject(), sprite,
+				sequence));
+		action.setTargetCoordinates(x1, y1, x2, y2);
+
+		action.setDuration(0);
+		action.setInterpolation(null);
+
+		return action;	}
 
 	public Action createSetPenSizeAction(Sprite sprite, SequenceAction sequence, Formula penSize) {
 		SetPenSizeAction action = Actions.action(SetPenSizeAction.class);
