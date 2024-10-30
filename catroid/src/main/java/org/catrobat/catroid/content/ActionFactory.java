@@ -102,6 +102,7 @@ import org.catrobat.catroid.content.actions.PlayDrumForBeatsAction;
 import org.catrobat.catroid.content.actions.PlayNoteForBeatsAction;
 import org.catrobat.catroid.content.actions.PlaySoundAction;
 import org.catrobat.catroid.content.actions.PlaySoundAtAction;
+import org.catrobat.catroid.content.actions.PlotArcAction;
 import org.catrobat.catroid.content.actions.PointInDirectionAction;
 import org.catrobat.catroid.content.actions.PointToAction;
 import org.catrobat.catroid.content.actions.RaspiIfLogicAction;
@@ -193,6 +194,7 @@ import org.catrobat.catroid.content.bricks.PhiroMotorMoveForwardBrick;
 import org.catrobat.catroid.content.bricks.PhiroMotorStopBrick;
 import org.catrobat.catroid.content.bricks.PhiroPlayToneBrick;
 import org.catrobat.catroid.content.bricks.PhiroRGBLightBrick;
+import org.catrobat.catroid.content.bricks.PlotArcBrick;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableDrum;
 import org.catrobat.catroid.content.bricks.brickspinner.PickableMusicalInstrument;
 import org.catrobat.catroid.formulaeditor.Formula;
@@ -584,6 +586,22 @@ public class ActionFactory extends Actions {
 	public Action createStopPlotAction(Sprite sprite) {
 		StopPlotAction action = Actions.action(StopPlotAction.class);
 		action.setSprite(sprite);
+		return action;
+	}
+
+	public Action createPlotArcAction(Sprite sprite, SequenceAction sequence,
+			PlotArcBrick.Directions direction,
+			Formula radius, Formula degrees) {
+		PlotArcAction action = Actions.action(PlotArcAction.class);
+		action.setScope(new Scope(ProjectManager.getInstance().getCurrentProject(), sprite,
+				sequence));
+		action.setDirection(direction);
+		action.setRadius(radius);
+		action.setDegrees(degrees);
+
+		action.setDuration(0);
+		action.setInterpolation(null);
+
 		return action;
 	}
 
