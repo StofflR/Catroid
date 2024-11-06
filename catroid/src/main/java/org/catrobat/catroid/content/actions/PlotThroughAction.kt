@@ -22,6 +22,8 @@
  */
 package org.catrobat.catroid.content.actions
 
+import android.graphics.Point
+import android.graphics.PointF
 import android.util.Log
 import com.badlogic.gdx.scenes.scene2d.actions.TemporalAction
 import org.catrobat.catroid.content.Scope
@@ -40,10 +42,8 @@ class PlotThroughAction : TemporalAction() {
     private var x2: Formula? = null
     private var y2: Formula? = null
 
-    private var x1Value: Int = 0
-    private var y1Value: Int = 0
-    private var x2Value: Int = 0
-    private var y2Value: Int = 0
+    private var p1: Point = Point()
+    private var p2: Point = Point()
 
     override fun begin() {
         super.begin()
@@ -51,10 +51,10 @@ class PlotThroughAction : TemporalAction() {
             return
         }
         try {
-            x1Value = if (x1 == null) 0 else x1!!.interpretInteger(scope)
-            y1Value = if (y1 == null) 0 else y1!!.interpretInteger(scope)
-            x2Value = if (x2 == null) 0 else x2!!.interpretInteger(scope)
-            y2Value = if (y2 == null) 0 else y2!!.interpretInteger(scope)
+            p1.x = if (x1 == null) 0 else x1!!.interpretInteger(scope)
+            p1.y = if (y1 == null) 0 else y1!!.interpretInteger(scope)
+            p2.x = if (x2 == null) 0 else x2!!.interpretInteger(scope)
+            p2.y = if (y2 == null) 0 else y2!!.interpretInteger(scope)
         } catch (interpretationException: InterpretationException) {
             Log.d(
                 javaClass.simpleName,
@@ -67,14 +67,19 @@ class PlotThroughAction : TemporalAction() {
     override fun update(percent: Float) {
         try {
             // calculate slope from current sprite look position to x2, y2
-            val spriteX = scope!!.sprite.look.xInUserInterfaceDimensionUnit
-            val spriteY = scope!!.sprite.look.yInUserInterfaceDimensionUnit
+            val ps = Point()
+            ps.x = scope!!.sprite.look.xInUserInterfaceDimensionUnit.toInt()
+            ps.y = scope!!.sprite.look.yInUserInterfaceDimensionUnit.toInt()
+
+            val pa = Point()
+            pa.x = (4 * p1.x - ps.x - p2.x) / 2
+            pa.y = (4 * p1.y - ps.y - p2.y) / 2
 
             val steps = 100
             for (i in 0..steps) {
                 val t = i.toDouble() / steps
-                val x = (1 - t).pow(2) * spriteX + 2 * (1 - t) * t * x1Value + t.pow(2) * x2Value
-                val y = (1 - t).pow(2) * spriteY + 2 * (1 - t) * t * y1Value + t.pow(2) * y2Value
+                val x = (1 - t).pow(2) * ps.x + 2 * (1 - t) * t * pa.x + t.pow(2) * p2.x
+                val y = (1 - t).pow(2) * ps.y + 2 * (1 - t) * t * pa.y + t.pow(2) * p2.y
                 scope!!.sprite.look.setPositionInUserInterfaceDimensionUnit(x.toFloat(), y.toFloat())
             }
         } catch (interpretationException: InterpretationException) {
