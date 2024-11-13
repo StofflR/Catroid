@@ -1708,6 +1708,16 @@ needs read and write access to it. You can always change permissions through you
     <string formatted="false" name="sound_monster">Monster</string>
     <!--  -->
 
+    <!-- Plot Arc direction strings -->
+    <string formatted="false" name="direction_left">left</string>
+    <string formatted="false" name="direction_right">right</string>
+    <string formatted="false" name="plot_arc_direction">Plot arc going</string>
+    <string formatted="false" name="plot_with_radius">with radius</string>
+    <string formatted="false" name="plot_for_degrees">for</string>
+    <string formatted="false" name="plot_through">Plot arc going through</string>
+    <string formatted="false" name="plot_through_target">going to</string>
+    <!--  -->
+
     <!-- Phiro bricks -->
     <!-- motor -->
     <string formatted="false" name="phiro_motor_stop">Stop Phiro motor</string>

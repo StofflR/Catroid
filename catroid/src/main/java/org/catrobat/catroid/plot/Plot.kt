@@ -108,7 +108,7 @@ class Plot
         nextPosition.x += camera.position.x
         nextPosition.y += camera.position.y
         if (currentPosition.x != nextPosition.x || currentPosition.y != nextPosition.y) {
-            val penSize: Float = screenRatio * 2.0F
+            val penSize: Float = screenRatio * 3.0F
             renderer.circle(currentPosition.x, currentPosition.y, penSize / 2)
             renderer.rectLine(
                 currentPosition.x, currentPosition.y, nextPosition.x, nextPosition.y,

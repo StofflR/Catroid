@@ -138,6 +138,8 @@ import org.catrobat.catroid.content.bricks.PlayNoteForBeatsBrick
 import org.catrobat.catroid.content.bricks.PlaySoundAndWaitBrick
 import org.catrobat.catroid.content.bricks.PlaySoundAtBrick
 import org.catrobat.catroid.content.bricks.PlaySoundBrick
+import org.catrobat.catroid.content.bricks.PlotArcBrick
+import org.catrobat.catroid.content.bricks.PlotThroughBrick
 import org.catrobat.catroid.content.bricks.PointInDirectionBrick
 import org.catrobat.catroid.content.bricks.PointToBrick
 import org.catrobat.catroid.content.bricks.PreviousLookBrick
@@ -722,6 +724,8 @@ open class CategoryBricksFactory {
         plotBrickList.add(StartPlotBrick())
         plotBrickList.add(StopPlotBrick())
         plotBrickList.add(SavePlotBrick(context.getString(R.string.brick_default_plot_file)))
+        plotBrickList.add(PlotArcBrick(PlotArcBrick.Directions.LEFT, 10.0f, 360.0f))
+        plotBrickList.add(PlotThroughBrick(0,0,0,0))
         return plotBrickList
     }
 
